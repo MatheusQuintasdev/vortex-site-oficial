@@ -1,4 +1,14 @@
-import { Zap, Target, MessageCircle, Rocket, ShieldCheck, BarChart3 } from "lucide-react";
+import {
+  Palette,
+  Zap,
+  Search,
+  MessageCircle,
+  Smartphone,
+  ShieldCheck,
+  Bot,
+  Workflow,
+  Headphones,
+} from "lucide-react";
 import { motion } from "framer-motion";
 import { GlowingEffect } from "@/components/ui/glowing-effect";
 import { CountUp } from "@/components/ui/count-up";
@@ -7,39 +17,57 @@ import { WaveText } from "@/components/ui/wave-text";
 
 const features = [
   {
-    icon: Zap,
-    title: "Performance Extrema",
-    desc: "Sites que carregam em menos de 1 segundo. Otimização brutal, código limpo e infra de ponta.",
+    icon: Palette,
+    title: "Design exclusivo e personalizado",
+    desc: "Identidade visual sob medida, sem templates. Cada projeto reflete o posicionamento da sua marca.",
     variant: "red" as const,
   },
   {
-    icon: Target,
-    title: "Design Focado em Conversão",
-    desc: "Cada pixel pensado para gerar venda. UX/UI premium que guia o cliente até o botão de compra.",
+    icon: Zap,
+    title: "Sites extremamente rápidos",
+    desc: "Carregamento abaixo de 1 segundo. Performance que retém visitantes e melhora seu ranqueamento.",
     variant: "default" as const,
   },
   {
-    icon: MessageCircle,
-    title: "Integração Direta",
-    desc: "Leads vão direto para o seu WhatsApp ou CRM. Sem intermediários, sem perda de oportunidade.",
+    icon: Search,
+    title: "Estrutura otimizada para SEO",
+    desc: "Código semântico, meta tags e arquitetura pensada para o Google posicionar sua marca no topo.",
     variant: "white" as const,
   },
   {
-    icon: Rocket,
-    title: "SEO & Tráfego Pago",
-    desc: "Google Ads, Facebook Ads e SEO técnico. Tráfego qualificado batendo na porta todos os dias.",
+    icon: MessageCircle,
+    title: "Integração com WhatsApp",
+    desc: "Leads vão direto para o seu WhatsApp comercial. Sem formulários frios, sem perda de oportunidade.",
     variant: "red" as const,
   },
   {
-    icon: ShieldCheck,
-    title: "Manutenção Premium",
-    desc: "Suporte ativo, alterações sob demanda e monitoramento 24/7. Seu site sempre no ar e atualizado.",
+    icon: Smartphone,
+    title: "Responsividade completa",
+    desc: "Experiência impecável em qualquer dispositivo. Mobile-first, sem ajustes de última hora.",
     variant: "default" as const,
   },
   {
-    icon: BarChart3,
-    title: "Dados & Resultado",
-    desc: "Analytics, heatmaps e relatórios mensais. Decisões guiadas por dados, não por achismo.",
+    icon: ShieldCheck,
+    title: "Segurança e estabilidade",
+    desc: "Infraestrutura robusta, certificado SSL e monitoramento 24/7. Seu site sempre no ar.",
+    variant: "white" as const,
+  },
+  {
+    icon: Bot,
+    title: "Automações inteligentes",
+    desc: "Fluxos automatizados de atendimento, captação de leads e nutrição que trabalham por você.",
+    variant: "red" as const,
+  },
+  {
+    icon: Workflow,
+    title: "Integrações estratégicas",
+    desc: "CRM, e-mail marketing, pagamentos, ERPs e ferramentas que potencializam sua operação.",
+    variant: "default" as const,
+  },
+  {
+    icon: Headphones,
+    title: "Suporte contínuo",
+    desc: "Acompanhamento próximo após o lançamento. Ajustes, evoluções e parceria de longo prazo.",
     variant: "white" as const,
   },
 ];
@@ -61,7 +89,6 @@ const stats: Array<{
 export function Features() {
   return (
     <section id="features" className="relative py-24 md:py-32 px-6 overflow-hidden scroll-mt-20 cv-auto">
-      {/* Decorative corner logos — discreet, no black bg */}
       <img
         src={vortexLogoClean}
         alt=""
@@ -91,12 +118,12 @@ export function Features() {
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           className="text-center mb-16"
         >
-          <span className="text-xs uppercase tracking-[0.3em] text-white/50">A solução</span>
+          <span className="text-xs uppercase tracking-[0.3em] text-white/50">Diferenciais</span>
           <h2 className="mt-3 text-4xl md:text-6xl font-bold tracking-tighter text-white">
-            Engenharia de <span className="text-gradient"><WaveText text="conversão" /></span>
+            Por que escolher a <span className="text-gradient"><WaveText text="VORTEX" /></span>?
           </h2>
           <p className="mt-5 max-w-2xl mx-auto text-white/60 text-base md:text-lg">
-            Cada projeto é uma estrutura calculada para transformar visitantes em clientes. Sem amadorismo, sem firula.
+            Estratégia, design e tecnologia trabalhando juntos para entregar uma presença digital que gera resultado real.
           </p>
         </motion.div>
 
@@ -107,22 +134,21 @@ export function Features() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.6, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] }}
-              className="relative rounded-2xl border border-white/10 bg-card/40 p-6 md:p-8 min-h-[280px] flex flex-col"
+              transition={{ duration: 0.6, delay: i * 0.06, ease: [0.16, 1, 0.3, 1] }}
+              className="relative rounded-2xl border border-white/10 bg-card/40 p-6 md:p-8 min-h-[260px] flex flex-col"
             >
               <GlowingEffect spread={40} glow proximity={64} inactiveZone={0.01} borderWidth={2} variant={f.variant} />
               <div className="relative z-10 flex-1 flex flex-col">
                 <div className="h-12 w-12 rounded-xl border border-white/10 bg-white/[0.03] flex items-center justify-center mb-6">
                   <f.icon className="h-5 w-5 text-primary" />
                 </div>
-                <h3 className="text-xl font-bold tracking-tight text-white">{f.title}</h3>
+                <h3 className="text-lg font-bold tracking-tight text-white">{f.title}</h3>
                 <p className="mt-3 text-sm text-white/65 leading-relaxed">{f.desc}</p>
               </div>
             </motion.div>
           ))}
         </div>
 
-        {/* Stats strip */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

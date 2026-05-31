@@ -17,6 +17,9 @@ const Showcase = lazy(() =>
 const Features = lazy(() =>
   import("@/components/vortex/Features").then((m) => ({ default: m.Features }))
 );
+const Process = lazy(() =>
+  import("@/components/vortex/Process").then((m) => ({ default: m.Process }))
+);
 const Testimonials = lazy(() =>
   import("@/components/vortex/Testimonials").then((m) => ({ default: m.Testimonials }))
 );
@@ -34,6 +37,18 @@ const FloatingWhatsApp = lazy(() =>
 );
 
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title: "Vortex Digital Innovations — sites premium que vendem por você" },
+      {
+        name: "description",
+        content:
+          "Agência de web design focada em alta conversão. Sites premium, design brutalista e performance extrema. Fale agora no WhatsApp.",
+      },
+      { property: "og:title", content: "Vortex Digital Innovations — sites premium que vendem" },
+      { property: "og:description", content: "Estruturas digitais focadas em performance e lucro." },
+    ],
+  }),
   component: Index,
 });
 
@@ -55,6 +70,7 @@ function Index() {
         </ErrorBoundary>
         <Showcase />
         <Features />
+        <Process />
         <Testimonials />
         <Pricing />
         <FinalCTA />

@@ -1,5 +1,6 @@
-import { lazy, Suspense, useEffect, useMemo, useRef, useState } from "react";
+import { lazy, Suspense, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
+import { Check } from "lucide-react";
 import { FlowButton } from "@/components/ui/flow-button";
 import { WHATSAPP_URL } from "./whatsapp";
 
@@ -7,34 +8,16 @@ const WaveText = lazy(() =>
   import("@/components/ui/wave-text").then((m) => ({ default: m.WaveText })),
 );
 
-const TITLES = ["sites que vendem", "design premium", "alta conversão", "velocidade brutal"];
+const TRUST = [
+  "Design Premium",
+  "Sites Otimizados",
+  "Suporte Especializado",
+  "Performance e Velocidade",
+];
 
 export function Hero() {
-  const [titleNumber, setTitleNumber] = useState(0);
-  const longest = useMemo(() => TITLES.reduce((a, b) => (a.length > b.length ? a : b)), []);
   const bgRef = useRef<HTMLDivElement>(null);
 
-  // Rotate headline (paused while tab is hidden)
-  useEffect(() => {
-    let t: number | undefined;
-    const schedule = () => {
-      t = window.setTimeout(() => {
-        setTitleNumber((n) => (n + 1) % TITLES.length);
-      }, 2400);
-    };
-    const onVisibility = () => {
-      if (t) window.clearTimeout(t);
-      if (!document.hidden) schedule();
-    };
-    schedule();
-    document.addEventListener("visibilitychange", onVisibility);
-    return () => {
-      if (t) window.clearTimeout(t);
-      document.removeEventListener("visibilitychange", onVisibility);
-    };
-  }, [titleNumber]);
-
-  // Pause background animations when Hero is offscreen
   useEffect(() => {
     const el = bgRef.current;
     if (!el || typeof IntersectionObserver === "undefined") return;
@@ -50,7 +33,6 @@ export function Hero() {
 
   return (
     <section id="home" className="relative min-h-screen w-full overflow-hidden flex items-center pt-16">
-      {/* Background — desktop only, paused when offscreen */}
       <div
         ref={bgRef}
         data-paused="false"
@@ -79,7 +61,6 @@ export function Hero() {
           }}
         />
       </div>
-      {/* Mobile-only lightweight glow (static, no paint cost) */}
       <div
         className="absolute inset-0 pointer-events-none md:hidden"
         style={{
@@ -100,32 +81,11 @@ export function Hero() {
           vortex.webdesign
         </motion.div>
 
-        <h1 className="mt-8 text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter leading-[0.95] text-white">
-          <Suspense fallback={<span>Sua vitrine digital</span>}>
-            <WaveText text="Sua vitrine digital" />
+        <h1 className="mt-8 text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tighter leading-[1.02] text-white max-w-5xl mx-auto">
+          <Suspense fallback={<span>Sites de alta performance para empresas que querem transmitir autoridade e converter mais clientes.</span>}>
+            <WaveText text="Sites de alta performance para empresas que querem transmitir " />
+            <span className="text-gradient"><WaveText text="autoridade e converter mais clientes." /></span>
           </Suspense>
-          <br />
-          precisa de{" "}
-          <span className="relative inline-flex w-full justify-center overflow-hidden text-center md:pb-4 md:pt-2 min-h-[1.1em]">
-            <span className="opacity-0 select-none" aria-hidden>
-              {longest}
-            </span>
-            {TITLES.map((title, index) => (
-              <motion.span
-                key={index}
-                className="absolute left-0 right-0 font-bold text-gradient will-change-transform"
-                initial={false}
-                transition={{ type: "spring", stiffness: 60, damping: 14 }}
-                animate={
-                  titleNumber === index
-                    ? { y: 0, opacity: 1 }
-                    : { y: titleNumber > index ? -120 : 120, opacity: 0 }
-                }
-              >
-                {title}
-              </motion.span>
-            ))}
-          </span>
         </h1>
 
         <motion.p
@@ -134,7 +94,7 @@ export function Hero() {
           transition={{ duration: 0.5, delay: 0.15 }}
           className="mt-6 max-w-2xl mx-auto text-base md:text-lg text-white/65 leading-relaxed"
         >
-          O seu site atual está matando suas vendas. Nós construímos estruturas digitais focadas em performance e lucro.
+          Desenvolvemos experiências digitais rápidas, modernas e estratégicas que fortalecem sua marca e transformam visitantes em oportunidades reais de negócio.
         </motion.p>
 
         <motion.div
@@ -144,19 +104,32 @@ export function Hero() {
           className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4"
         >
           <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">
-            <FlowButton text="Chamar no WhatsApp" variant="primary" />
+            <FlowButton text="Solicitar Orçamento" variant="primary" />
           </a>
           <a
-            href="#features"
+            href="#showcase"
             onClick={(e) => {
               e.preventDefault();
-              document.getElementById("features")?.scrollIntoView({ behavior: "smooth", block: "start" });
+              document.getElementById("showcase")?.scrollIntoView({ behavior: "smooth", block: "start" });
             }}
-            className="text-sm text-white/60 hover:text-white transition-colors uppercase tracking-[0.2em]"
           >
-            Ver diferenciais ↓
+            <FlowButton text="Ver Projetos" />
           </a>
         </motion.div>
+
+        <motion.ul
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.35 }}
+          className="mt-10 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-[12px] md:text-sm text-white/70"
+        >
+          {TRUST.map((t) => (
+            <li key={t} className="inline-flex items-center gap-2">
+              <Check className="h-4 w-4 text-primary" />
+              <span className="uppercase tracking-[0.18em]">{t}</span>
+            </li>
+          ))}
+        </motion.ul>
       </div>
     </section>
   );

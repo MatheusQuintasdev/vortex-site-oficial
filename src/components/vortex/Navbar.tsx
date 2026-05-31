@@ -6,8 +6,8 @@ import { FlowButton } from "@/components/ui/flow-button";
 
 const links = [
   { href: "#home", label: "Início" },
-  { href: "#showcase", label: "Trabalhos" },
   { href: "#features", label: "Diferenciais" },
+  { href: "#processo", label: "Processo" },
   { href: "#planos", label: "Planos" },
 ];
 

@@ -2,6 +2,21 @@ import { TestimonialsColumn } from "@/components/ui/testimonials-columns-1";
 import { motion } from "motion/react";
 import maluImg from "@/assets/testimonial-malu.jpg";
 import { WaveText } from "@/components/ui/wave-text";
+import { CountUp } from "@/components/ui/count-up";
+
+const counters: Array<{
+  label: string;
+  end?: number;
+  suffix?: string;
+  prefix?: string;
+  decimals?: number;
+  staticValue?: string;
+}> = [
+  { end: 25, suffix: "+", label: "Projetos Entregues" },
+  { end: 20, suffix: "+", label: "Clientes Atendidos" },
+  { end: 3, suffix: "+", label: "Anos de Experiência" },
+  { end: 98, suffix: "%", label: "Taxa de Satisfação" },
+];
 
 const testimonials = [
   {
@@ -77,16 +92,42 @@ export function Testimonials() {
         >
           <div className="flex justify-center mb-6">
             <span className="border border-white/20 text-white/70 text-xs font-bold uppercase tracking-[0.2em] py-2 px-6 rounded-none">
-              A Verdade Que Ninguém Fala
+              Prova Social
             </span>
           </div>
 
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-white text-center uppercase tracking-tighter leading-[1.05]" style={{ fontFamily: '"Archivo Black", "Space Grotesk", sans-serif', letterSpacing: '-0.04em' }}>
-            Empresários que <br /> <span className="text-[#D30020]"><WaveText text="viraram a chave" /></span>
+            Empresas que <br /> <span className="text-[#D30020]"><WaveText text="confiam na VORTEX" /></span>
           </h2>
           <p className="text-center mt-6 text-white/60 text-lg max-w-lg">
-            Resultados reais de quem trocou o site amador por uma estrutura de alta conversão da Vortex.
+            Resultados, depoimentos e números reais de quem elevou o nível da sua presença digital com a gente.
           </p>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 0.7 }}
+          className="grid grid-cols-2 md:grid-cols-4 gap-px bg-white/10 border border-white/10 rounded-2xl overflow-hidden max-w-5xl mx-auto mb-16"
+        >
+          {counters.map((s) => (
+            <div key={s.label} className="bg-black p-6 md:p-8 text-center">
+              <div className="text-3xl md:text-4xl font-black tracking-tighter text-[#D30020] tabular-nums">
+                {s.staticValue ? (
+                  s.staticValue
+                ) : (
+                  <CountUp
+                    end={s.end ?? 0}
+                    prefix={s.prefix ?? ""}
+                    suffix={s.suffix ?? ""}
+                    decimals={s.decimals ?? 0}
+                  />
+                )}
+              </div>
+              <div className="mt-2 text-[11px] uppercase tracking-[0.18em] text-white/55">{s.label}</div>
+            </div>
+          ))}
         </motion.div>
 
         <div className="flex justify-center gap-6 mt-10 [mask-image:linear-gradient(to_bottom,transparent,black_15%,black_85%,transparent)] max-h-[600px] overflow-hidden">

@@ -5,9 +5,6 @@ import {
   Plan,
   PlanName,
   Badge,
-  Price,
-  MainPrice,
-  Period,
   Body,
   List,
   ListItem,
@@ -19,42 +16,36 @@ import { WaveText } from "@/components/ui/wave-text";
 
 const plans = [
   {
-    id: "start",
+    id: "essencial",
     icon: Sparkles,
-    name: "Landing Page Start",
-    originalPrice: "R$ 2.000",
-    price: "R$ 850",
-    period: "/ projeto",
-    description: "Site profissional de uma página, ideal para captar leads pelo Instagram.",
+    name: "Plano Essencial",
+    description: "Para empresas que querem uma presença digital profissional e geradora de leads qualificados.",
     features: [
-      "Landing page de alta conversão",
-      "Design 100% personalizado",
+      "Site profissional sob medida",
       "Totalmente responsivo (mobile-first)",
+      "SEO básico configurado",
       "Integração direta com WhatsApp",
-      "SEO básico e performance otimizada",
-      "Entrega em até 3 dias úteis",
+      "Performance otimizada",
+      "Entrega ágil e revisões inclusas",
     ],
-    cta: "Começar agora",
+    cta: "Solicitar Orçamento",
     highlight: false,
   },
   {
     id: "premium",
     icon: Rocket,
-    name: "E-commerce Premium",
-    originalPrice: "R$ 4.500",
-    price: "R$ 2.890",
-    period: "/ projeto",
-    description: "Loja virtual completa ou site multi-página com integração de pagamentos.",
+    name: "Plano Premium",
+    description: "Para marcas que precisam de uma estrutura digital robusta, escalável e preparada para crescer.",
     features: [
-      "Tudo do plano Start +",
-      "Loja virtual / múltiplas páginas",
-      "Integração com pagamentos (Stripe/Pix)",
-      "Painel administrativo dedicado",
-      "Blog e SEO avançado",
-      "Domínio + hospedagem inclusos (1º ano)",
-      "Suporte prioritário por 90 dias",
+      "Tudo do plano Essencial",
+      "E-commerce ou múltiplas páginas",
+      "SEO avançado e estratégico",
+      "Estrutura escalável e modular",
+      "Recursos avançados e integrações",
+      "Maior nível de personalização",
+      "Suporte prioritário",
     ],
-    cta: "Quero o Premium",
+    cta: "Solicitar Orçamento",
     highlight: true,
   },
 ];
@@ -64,26 +55,19 @@ const addOns = [
     id: "gmn",
     icon: MapPin,
     name: "Google Meu Negócio",
-    price: "R$ 250",
-    period: "único",
-    description: "Perfil profissional configurado, otimizado e verificado no Google Maps.",
+    description: "Perfil profissional configurado, otimizado e verificado para sua marca aparecer no Google Maps.",
   },
   {
     id: "ads",
     icon: Megaphone,
     name: "Tráfego Pago",
-    price: "Sob consulta",
-    period: "mensal",
-    description: "Campanhas de Facebook Ads e Google Ads para escalar seus leads.",
+    description: "Campanhas estratégicas no Google e Meta Ads para escalar a geração de oportunidades.",
   },
   {
     id: "manutencao",
     icon: Wrench,
-    name: "Manutenção Mensal",
-    price: "R$ 85",
-    period: "/ mês",
-    description: "Obrigatória — garante todas as alterações e ajustes que você pedir.",
-    required: true,
+    name: "Manutenção e Evolução",
+    description: "Acompanhamento contínuo, ajustes, otimizações e melhorias mensais no seu site.",
   },
 ];
 
@@ -113,13 +97,13 @@ export function Pricing() {
   return (
     <section id="planos" className="relative py-24 md:py-32 px-6 cv-auto">
       <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-16">
+        <div className="text-center mb-12">
           <span className="text-xs uppercase tracking-[0.3em] text-white/50">Planos</span>
           <h2 className="mt-3 text-4xl md:text-6xl font-bold tracking-tighter text-white">
             Escolha sua <span className="text-gradient"><WaveText text="estrutura" /></span>
           </h2>
-          <p className="mt-4 text-white/60 max-w-xl mx-auto">
-            Sem mensalidades escondidas. Você paga pelo site, recebe pronto em 3 dias úteis.
+          <p className="mt-5 max-w-2xl mx-auto text-white/65 text-base md:text-lg">
+            Cada projeto possui necessidades únicas. Solicite um orçamento personalizado e receba uma proposta sob medida para a sua empresa.
           </p>
         </div>
 
@@ -133,15 +117,8 @@ export function Pricing() {
                     <PlanName className={p.highlight ? "text-white" : ""}>
                       <Icon className={p.highlight ? "text-primary" : "text-white/70"} /> {p.name}
                     </PlanName>
-                    {p.highlight && <Badge>Mais vendido</Badge>}
+                    {p.highlight && <Badge>Mais procurado</Badge>}
                   </Plan>
-                  <Price>
-                    {p.originalPrice && (
-                      <span className="text-white/40 text-sm line-through mr-2">{p.originalPrice}</span>
-                    )}
-                    <MainPrice>{p.price}</MainPrice>
-                    <Period>{p.period}</Period>
-                  </Price>
                   <Description>{p.description}</Description>
                 </Header>
                 <Body>
@@ -160,7 +137,6 @@ export function Pricing() {
           })}
         </div>
 
-        {/* Add-ons */}
         <div className="mt-20">
           <div className="text-center mb-10">
             <span className="text-xs uppercase tracking-[0.3em] text-white/50">Serviços adicionais</span>
@@ -175,42 +151,25 @@ export function Pricing() {
               return (
                 <div
                   key={a.id}
-                  className={`relative rounded-2xl border p-6 backdrop-blur transition-colors hover:border-primary/40 ${
-                    a.required
-                      ? "border-primary/40 bg-primary/[0.04]"
-                      : "border-white/10 bg-card/60"
-                  }`}
+                  className="relative rounded-2xl border border-white/10 bg-card/60 p-6 backdrop-blur transition-colors hover:border-primary/40"
                 >
-                  {a.required && (
-                    <span className="absolute top-3 right-3 text-[10px] uppercase tracking-widest text-primary border border-primary/40 px-2 py-0.5 rounded-full">
-                      Obrigatório
-                    </span>
-                  )}
                   <div className="h-10 w-10 rounded-lg bg-primary/10 border border-primary/30 flex items-center justify-center text-primary mb-4">
                     <Icon className="h-5 w-5" />
                   </div>
                   <h4 className="text-lg font-semibold text-white">{a.name}</h4>
                   <p className="mt-1 text-sm text-white/60">{a.description}</p>
-                  <div className="mt-4 flex items-end gap-1">
-                    <span className="text-2xl font-bold text-white">{a.price}</span>
-                    <span className="text-xs text-white/60 pb-1">{a.period}</span>
-                  </div>
                   <a
                     href={whatsappWithPlan(a.name)}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="mt-5 block"
                   >
-                    <FlowButton text="Começar agora" className="w-full justify-center" />
+                    <FlowButton text="Solicitar Orçamento" className="w-full justify-center" />
                   </a>
                 </div>
               );
             })}
           </div>
-
-          <p className="mt-8 text-center text-xs text-white/40 max-w-2xl mx-auto">
-            * A manutenção mensal (R$ 85/mês) é obrigatória para qualquer plano contratado — sem ela não realizamos alterações no site após a entrega.
-          </p>
         </div>
       </div>
     </section>
